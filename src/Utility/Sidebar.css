@@ -1,0 +1,14 @@
+.mainsidebar {
+    max-width: 15rem;
+    height: 100vh;
+    padding: 10px;
+    overflow: scroll;
+}
+
+@media only screen and (max-width: 769px) {
+    /* .mainsidebar {
+        position: fixed;
+        z-index: 100;
+        background-color: white;
+    } */
+}
