@@ -14,6 +14,7 @@ export const CreateDoctor = (props) => {
     const [doctor, setDoctor] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    // get doctor data
     useEffect(() => {
         fetchAllDoctorData();
     }, []);

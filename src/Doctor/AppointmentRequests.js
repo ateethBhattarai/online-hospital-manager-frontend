@@ -1,4 +1,4 @@
-import { Skeleton } from 'antd';
+import { Card, Empty, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useStateContext } from '../Context/ContextProvider';
@@ -9,7 +9,7 @@ const AppointmentRequests = () => {
     const [patient, setPatient] = useState([]);
     const [appointment, setAppointment] = useState([]);
     const [status, setStatus] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchAppointmentData();
@@ -22,7 +22,7 @@ const AppointmentRequests = () => {
 
         axiosClient.get('/appointment').then((res) => {
             setAppointment(res.data.patient);
-            setLoading(true);
+            setLoading(false);
         })
 
     }
@@ -89,7 +89,7 @@ const AppointmentRequests = () => {
     return (
         <>
             <DoctorSideBar />
-            <div className="container text-center box-shadow p-2">
+            <Card className="container text-center box-shadow p-2">
                 <h4>Request Table</h4>
                 <div className='container-fluid table_data rounded text-light p-4 mt-3 '>
                     <table className="table table-hover">
@@ -104,9 +104,9 @@ const AppointmentRequests = () => {
                             </tr>
                         </thead>
                         {
-                            loading ?
+                            !loading ?
                                 <tbody>
-                                    {upcomingPendingAppointments.map((upcomingPendingAppointment, index) => (
+                                    {!upcomingPendingAppointments ? upcomingPendingAppointments.map((upcomingPendingAppointment, index) => (
                                         <tr key={upcomingPendingAppointment.id}>
                                             <td scope='row'>{index + 1}</td>
                                             {patientData.map((patientData) => (
@@ -122,7 +122,11 @@ const AppointmentRequests = () => {
                                                 <button className='btn btn-danger' onClick={() => rejectAppointment(upcomingPendingAppointment.id)}>Reject</button>
                                             </td>
                                         </tr>
-                                    ))}
+                                    )) :
+                                        <tr>
+                                            <td colSpan={6}><Empty /></td>
+                                        </tr>
+                                    }
                                 </tbody> :
                                 <tbody>
                                     <tr>
@@ -132,7 +136,7 @@ const AppointmentRequests = () => {
                         }
                     </table>
                 </div>
-            </div>
+            </Card>
         </>
     )
 }

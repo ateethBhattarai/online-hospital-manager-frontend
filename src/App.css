@@ -11,13 +11,28 @@
 
 }
 
+body {
+  background: linear-gradient(to right, rgb(173, 169, 150), rgb(242, 242, 242), rgb(219, 219, 219), rgb(234, 234, 234));
+}
+
+.navbar {
+  background: linear-gradient(to left, rgb(171, 186, 171), rgb(255, 255, 255));
+}
+
+.button_color {
+  background-color: #5d6b7e !important;
+  color: rgb(231, 224, 224) !important;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 ::-webkit-scrollbar {
   display: none;
 }
 
-body {
+/* body {
   background-color: var(--primary-color);
-}
+} */
 
 /* Admin SideBar CSS */
 .main_container {

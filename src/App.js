@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { EditPatient } from './Admin/AdminPatient/EditPatient';
 import { CreatePatient } from './Admin/AdminPatient/CreatePatient';
 import { ViewPatient } from './Admin/AdminPatient/ViewPatient';
-import { AdminSideBar } from './Utility/AdminSideBar';
+// import { AdminSideBar } from './Utility/AdminSideBar';
 import { CreateDoctor } from './Admin/AdminDoctor/CreateDoctor'
 import { AddDoctor } from './Admin/AdminDoctor/AddDoctor';
 import { EditDoctor } from './Admin/AdminDoctor/EditDoctor';
@@ -13,12 +13,12 @@ import { CreatePharmacist } from './Admin/AdminPharmacist/CreatePharmacist';
 import { AddPharmacist } from './Admin/AdminPharmacist/AddPharmacist';
 import { EditPharmacist } from './Admin/AdminPharmacist/EditPharmacist';
 import { ViewPharmacist } from './Admin/AdminPharmacist/ViewPharmacist';
-import { Patient } from './Patient/Patient';
-import { Appointment } from './Patient/PatientAppointment';
+// import { Patient } from './Patient/Patient';
+// import { Appointment } from './Patient/PatientAppointment';
 import { DoctorAppointments } from './Doctor/Appointment';
-import { PatientSetting } from './Patient/PatientSetting';
-import { RequestAppointment } from './Patient/RequestAppointment';
-import { PatientChat } from './Patient/PatientChat';
+// import { PatientSetting } from './Patient/PatientSetting';
+// import { RequestAppointment } from './Patient/RequestAppointment';
+// import { PatientChat } from './Patient/PatientChat';
 import { Login } from './MainPage/Login';
 import { SignUp } from './MainPage/SignUp';
 import { Home } from './MainPage/Home';
@@ -29,6 +29,11 @@ import Admin from './Admin/Admin';
 import PharmacistDashboard from './Pharmacist/PharmacistDashboard';
 import PageNotFound from './PageNotFound';
 
+import PatientDashboard from './Patient/PatientDashboard';
+import Navbar from './Patient/Navbar';
+import DoctorDetails from './Patient/DoctorDetails';
+import Setting from './Patient/Setting';
+import ViewDoctorDetails from './Patient/ViewDoctorDetails';
 
 function App() {
   return (
@@ -42,11 +47,17 @@ function App() {
 
 
           {/* Patient routes */}
-          <Route path='/patientDashboard' element={<Patient />} />
+          {/* <Route path='/patientDashboard' element={<Patient />} />
           <Route path='/patientAppointment' element={<Appointment />} />
           <Route path='/patientSetting' element={<PatientSetting />} />
           <Route path='/patientBookAppointment' element={<RequestAppointment />} />
-          <Route path='/patient/chat' element={<PatientChat />} />
+          <Route path='/patient/chat' element={<PatientChat />} /> */}
+          <Route path='/patient' element={<Navbar />} >
+            <Route index element={<PatientDashboard />} />
+            <Route path='doctordetails' element={<DoctorDetails />} />
+            <Route path='setting' element={<Setting />} />
+            <Route path='viewdoctor/:name' element={<ViewDoctorDetails />} />
+          </Route>
 
           {/* Doctor routes */}
           <Route path='/doctorDashboard' element={<Doctor />} />

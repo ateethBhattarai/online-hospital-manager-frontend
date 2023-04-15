@@ -1,4 +1,4 @@
-import { Skeleton } from 'antd';
+import { Card, Empty, Skeleton } from 'antd';
 import React, { useEffect, useState } from 'react'
 import { useStateContext } from '../Context/ContextProvider';
 import axiosClient from '../Services/axios';
@@ -6,7 +6,7 @@ import { DoctorSideBar } from '../Utility/DoctorSidebar'
 
 export const DoctorAppointments = () => {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const { token, setUser, user } = useStateContext();
     useEffect(() => {
         axiosClient.get('/user').then(({ data }) => {
@@ -16,11 +16,12 @@ export const DoctorAppointments = () => {
         })
     }, [])
 
+    setTimeout(() => { setLoading(false); }, 5000);
+
     const [upcomingAppointments, setUpcomingAppointments] = useState([])
     useEffect(() => {
         user.get_doctor !== undefined && axiosClient.get('/appointments/doctor/upcoming/' + user.get_doctor.id).then((res) => {
             setUpcomingAppointments(res.data);
-            setLoading(true);
         })
     }, [user])
 
@@ -43,7 +44,7 @@ export const DoctorAppointments = () => {
     return (
         <>
             <DoctorSideBar />
-            <div className="container text-center box-shadow p-2">
+            <Card className="container text-center box-shadow p-2">
                 <h4>Upcoming Appointments</h4>
                 <div className='container-fluid table_data rounded text-light p-4 mt-3 appointment-table'>
                     <table className="table table-hover">
@@ -57,9 +58,10 @@ export const DoctorAppointments = () => {
                             </tr>
                         </thead>
                         {
-                            loading ?
+                            !loading ?
                                 <tbody>
-                                    {upcomingAppointments.map((upcomingAppointment, index) => (
+                                    {console.log(upcomingAppointments)}
+                                    {!upcomingAppointments ? upcomingAppointments.map((upcomingAppointment, index) => (
                                         <tr key={upcomingAppointment.id}>
                                             <td scope="row">{index + 1}</td>
                                             <td>{upcomingAppointment.visit_date_and_time}</td>
@@ -71,7 +73,11 @@ export const DoctorAppointments = () => {
                                             ))}
                                             <td>{upcomingAppointment.validation_status}</td>
                                         </tr>
-                                    ))}
+                                    )) :
+                                        <tr>
+                                            <td colSpan={5}><Empty /></td>
+                                        </tr>
+                                    }
                                 </tbody> :
                                 <tbody>
                                     <tr>
@@ -81,8 +87,8 @@ export const DoctorAppointments = () => {
                         }
                     </table>
                 </div>
-            </div>
-            <div className="container text-center box-shadow p-2">
+            </Card>
+            <Card className="container text-center box-shadow p-2 my-4">
                 <h4>Rejected Appointments</h4>
                 <div className='container-fluid table_data rounded text-light p-4 mt-3 appointment-table'>
                     <table className="table table-hover">
@@ -96,9 +102,9 @@ export const DoctorAppointments = () => {
                             </tr>
                         </thead>
                         {
-                            loading ?
+                            !loading ?
                                 <tbody>
-                                    {declinedAppointments.map((declinedAppointment, index) => (
+                                    {!declinedAppointments ? declinedAppointments.map((declinedAppointment, index) => (
                                         <tr key={declinedAppointment.id}>
                                             <td scope="row">{index + 1}</td>
                                             <td>{declinedAppointment.visit_date_and_time}</td>
@@ -110,7 +116,11 @@ export const DoctorAppointments = () => {
                                             ))}
                                             <td>{declinedAppointment.validation_status}</td>
                                         </tr>
-                                    ))}
+                                    )) :
+                                        <tr>
+                                            <td colSpan={5}><Empty /></td>
+                                        </tr>
+                                    }
                                 </tbody> :
                                 <tbody>
                                     <tr>
@@ -120,7 +130,7 @@ export const DoctorAppointments = () => {
                         }
                     </table>
                 </div>
-            </div>
+            </Card>
         </>
     )
 }
