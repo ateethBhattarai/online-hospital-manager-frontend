@@ -1,13 +1,20 @@
 import React from 'react'
-import { PharmacistSideBar } from '../Utility/PharmacistSideBar'
-import { Card } from 'antd'
+import { Navigate } from 'react-router-dom';
+import { useStateContext } from '../Context/ContextProvider';
+import { DoctorSideBar } from '../Utility/DoctorSidebar'
+import { Card } from 'antd';
 
-const PharmacistDashboard = () => {
+const Doctor = () => {
+    const { token } = useStateContext();
+
+    if (!token) {
+        return <Navigate to='/login' />
+    }
     return (
         <>
-            <PharmacistSideBar />
+            <DoctorSideBar />
             <div className="container-fluid text-center">
-                <h1>Pharmacist Dashboard</h1>
+                <h1>Doctor Dashboard</h1>
                 <div className="d-flex border justify-content-center gap-5">
                     <Card style={{ width: '15rem', height: '10rem' }}>
                         <div className="d-flex justify-content-around">
@@ -21,18 +28,18 @@ const PharmacistDashboard = () => {
                             </div>
                         </div>
                     </Card>
-                    <Card style={{ width: '18rem', height: '10rem' }}>
+                    <Card style={{ width: '24rem', height: '10rem' }}>
                         <div className="d-flex">
                             <div className="col-6">
-                                <img src="https://www.shutterstock.com/image-vector/inventory-control-icon-monochrome-simple-600w-2179649413.jpg" alt=""
+                                <img src="https://www.shutterstock.com/image-vector/calendar-vector-icon-600w-659999788.jpg" alt=""
                                     style={{
                                         height: "120px"
                                     }} />
                             </div>
                             <div className="col-5">
-                                <h3>Inventory</h3>
+                                <h3>Appointments</h3>
                                 <br />
-                                <h5>113</h5>
+                                <h5>2</h5>
                             </div>
                         </div>
                     </Card>
@@ -54,4 +61,4 @@ const PharmacistDashboard = () => {
     )
 }
 
-export default PharmacistDashboard
+export default Doctor

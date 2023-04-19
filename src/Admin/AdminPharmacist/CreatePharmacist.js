@@ -65,9 +65,10 @@ export const CreatePharmacist = (props) => {
                                                 <td>{pharmacists.address}</td>
                                                 <td>{pharmacists.dob}</td>
                                                 <td>{pharmacists.phone_number}</td>
-                                                <td>{pharmacists.get_pharmacist.qualification}</td>
-                                                <td>{pharmacists.get_pharmacist.created_by}</td>
-                                                <td>{pharmacists.get_pharmacist.modified_by}</td>
+                                                {console.log(pharmacists)}
+                                                <td>{pharmacists.get_pharmacist ? pharmacists.get_pharmacist.qualification : ""}</td>
+                                                <td>{pharmacists.get_pharmacist ? pharmacists.get_pharmacist.created_by : ""}</td>
+                                                <td>{pharmacists.get_pharmacist ? pharmacists.get_pharmacist.modified_by : ""}</td>
                                                 <td className='d-flex'>
                                                     <Link to={"/admin/editPharmacist/" + pharmacists.id} className='btn btn-primary mx-1'>EDIT</Link>
                                                     {/* <Link to={"/viewPharmacist/" + pharmacists.id} className='btn btn-success mx-1'>View</Link> */}

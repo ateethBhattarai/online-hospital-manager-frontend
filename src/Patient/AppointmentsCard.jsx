@@ -7,6 +7,7 @@ import CancelledAppointments from './Appointments/CancelledAppointments';
 import PreviousAppointments from './Appointments/PreviousAppointments';
 import RejectedAppointments from './Appointments/RejectedAppointments';
 import PendingAppointment from './Appointments/PendingAppointment';
+import RequestAppointment from './RequestAppointment';
 
 
 const tabListNoTitle = [
@@ -66,26 +67,7 @@ const AppointmentsCard = () => {
                             Add
                         </Button>
                         <Modal title="Request Appointment" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-                            <div className="mb-3">
-                                <label for="" className="form-label">Name</label>
-                                <input type="text" name="" id="" className="form-control" placeholder="" aria-describedby="helpId" />
-                                <small id="helpId" className="text-muted">Help text</small>
-                            </div>
-                            <div className="mb-3">
-                                <label for="" className="form-label">Name</label>
-                                <input type="text" name="" id="" className="form-control" placeholder="" aria-describedby="helpId" />
-                                <small id="helpId" className="text-muted">Help text</small>
-                            </div>
-                            <div className="mb-3">
-                                <label for="" className="form-label">Name</label>
-                                <input type="text" name="" id="" className="form-control" placeholder="" aria-describedby="helpId" />
-                                <small id="helpId" className="text-muted">Help text</small>
-                            </div>
-                            <div className="mb-3">
-                                <label for="" className="form-label">Name</label>
-                                <input type="text" name="" id="" className="form-control" placeholder="" aria-describedby="helpId" />
-                                <small id="helpId" className="text-muted">Help text</small>
-                            </div>
+                            <RequestAppointment />
                         </Modal>
                     </>
                 }

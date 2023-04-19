@@ -11,6 +11,6 @@ export const patientAccountChangeSchema = Yup.object({
     name: Yup.string().min(2),
     address: Yup.string(),
     dob: Yup.date(),
-    phone_number: Yup.number().positive().min(10).max(10).integer(),
+    phone_number: Yup.number().positive().min(9).integer(),
     chronic_disease: Yup.string(),
 })

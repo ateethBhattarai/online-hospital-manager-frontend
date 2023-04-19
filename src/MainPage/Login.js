@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useStateContext } from '../Context/ContextProvider';
 import axiosClient from '../Services/axios';
 import { motion } from 'framer-motion';
+import { Card, message } from 'antd';
 
 export const Login = () => {
     const [input, setInput] = useState({});
@@ -13,7 +14,7 @@ export const Login = () => {
 
     useEffect(() => {
         if (token) {
-            return navigate(`/${input.role}Dashboard`);
+            return navigate(`/${input.role}`);
         }
     }, [])
 
@@ -52,16 +53,8 @@ export const Login = () => {
     }
     return (
         <>
-            <div className='col-sm-6 offset-sm-3 border p-3'>
-                {notification &&
-                    <motion.div className="alert alert-danger" role="alert" style={{ position: "fixed" }}
-                        initial={{ y: -1000 }}
-                        animate={{ y: 0, x: 0 }}
-                        transition={{ delay: 0.6 }}
-                    >
-                        {notification}
-                    </motion.div>
-                }
+            <Card className='col-sm-6 offset-sm-3 border mt-4 p-2'>
+                {notification && message.error(notification)}
                 <div className="my-4">
                     <div className="d-flex">
                         <h2 className='mx-2'>Login as:</h2>
@@ -79,7 +72,7 @@ export const Login = () => {
                 <input type="password" name='password' className="form-control my-2" value={input.password || ""} onChange={handleChanges} placeholder='password' />
                 <input type="text" value={input.role = userRole} hidden readOnly />
                 <button className='btn btn-primary my-2' onClick={submitForm}>Login</button>
-            </div>
+            </Card>
         </>
     )
 }

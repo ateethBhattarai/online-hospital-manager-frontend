@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Button, Card, Image, Modal, Skeleton } from 'antd';
 
 const ViewDoctorDetails = () => {
+
     const { name } = useParams();
     const [doctor, setDoctor] = useState([])
     const [loading, setLoading] = useState(true);
@@ -59,7 +60,7 @@ const ViewDoctorDetails = () => {
                                 {!loading ?
                                     <>
                                         <Button className='button_color' onClick={showModal}>
-                                            Open Modal
+                                            Book Appointment
                                         </Button>
                                         <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                                             <input type='text' placeholder='Name' />

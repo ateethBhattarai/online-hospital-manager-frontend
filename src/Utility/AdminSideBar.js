@@ -3,7 +3,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FaBars, FaCogs, FaHome, FaHospitalAlt, FaSearch } from 'react-icons/fa';
 import { IoMdPeople, IoIosPerson } from 'react-icons/io';
 import { GiDoctorFace } from 'react-icons/gi';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
+import { useStateContext } from '../Context/ContextProvider';
+import axiosClient from '../Services/axios';
+import { message } from 'antd';
+import { AiOutlineLogout } from 'react-icons/ai';
 
 
 export const AdminSideBar = () => {
@@ -13,7 +17,7 @@ export const AdminSideBar = () => {
 
     const routes = [
         {
-            path: "/admin",
+            path: "/adminDashboard",
             name: "Dashboard",
             icon: <FaHome />
         },
@@ -44,6 +48,22 @@ export const AdminSideBar = () => {
         },
     ];
 
+
+
+    //logout action
+    const { token, setToken, setUser } = useStateContext();
+    // if (!token) {
+    //     return <Navigate to='/login' />
+    // }
+    const logout = () => {
+        axiosClient.post('/logout').then(() => {
+            setUser({});
+            setToken(null);
+            <Navigate to='/login' />
+            message.success('Logged Out successfully!!');
+        })
+    }
+
     return (
         <div className='main_container' style={{ position: isOpen && "fixed" }}>
             <motion.div animate={{ width: isOpen ? "210px" : "38px" }} className="sidebar">
@@ -68,6 +88,12 @@ export const AdminSideBar = () => {
                             </AnimatePresence>
                         </NavLink>
                     ))}
+                    <div className="link" onClick={() => logout()} style={{ cursor: "pointer" }}>
+                        <div className="icon" ><AiOutlineLogout /></div>
+                        <AnimatePresence>
+                            {isOpen && <motion.div className="link_text">Log Out</motion.div>}
+                        </AnimatePresence>
+                    </div>
                 </section>
             </motion.div>
         </div>

@@ -1,13 +1,31 @@
 import React from 'react';
-import { Avatar, Dropdown, Tooltip } from 'antd';
+import { Avatar, Dropdown, Tooltip, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { Link, Outlet } from 'react-router-dom';
 import { GiDoctorFace } from 'react-icons/gi';
 import { AiOutlineShoppingCart, AiOutlineHome } from 'react-icons/ai';
 import { MdOutlineInventory } from 'react-icons/md';
-// import DoctorDetails from './DoctorDetails';
+import { BsFillChatDotsFill } from 'react-icons/bs';
+import { useStateContext } from '../Context/ContextProvider';
+import { Navigate } from 'react-router-dom';
+import axiosClient from '../Services/axios';
 
 const Navbar = () => {
+    const { token, setUser, setToken } = useStateContext();
+
+    if (!token) {
+        return <Navigate to='/login' />
+    }
+
+    const logout = () => {
+        axiosClient.post('/logout').then(() => {
+            setUser({});
+            setToken(null);
+            <Navigate to='/login' />
+            message = {}.success('Logged Out successfully!!');
+        })
+    }
+
     const items = [
         {
             key: '1',
@@ -17,19 +35,11 @@ const Navbar = () => {
                 </Link>
             ),
         },
-        {
-            key: '2',
-            label: (
-                <Link className='text-decoration-none' rel="noopener noreferrer" to="#">
-                    Add Appointments
-                </Link>
-            ),
-        },
         { type: 'divider' },
         {
             key: '3',
             label: (
-                <Link className='text-decoration-none' rel="noopener noreferrer" to="/">
+                <Link className='text-decoration-none' rel="noopener noreferrer" to="/" onClick={() => logout()}>
                     Log-Out
                 </Link>
             ),
@@ -47,15 +57,15 @@ const Navbar = () => {
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 fs-4">
                             <li className="nav-item">
                                 <Tooltip title="Home">
-                                    <Link className="nav-link" to='/patient'><AiOutlineHome /></Link>
+                                    <Link className="nav-link" to='/patientDashboard'><AiOutlineHome /></Link>
                                 </Tooltip>
                             </li>
                             <li className="nav-item">
                                 <Tooltip title="Doctors">
-                                    <Link className="nav-link" to='/patient/doctordetails'><GiDoctorFace /></Link>
+                                    <Link className="nav-link" to='/patientDashboard/doctordetails'><GiDoctorFace /></Link>
                                 </Tooltip>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <Tooltip title="Inventory">
                                     <a className="nav-link" to="#"><MdOutlineInventory /></a>
                                 </Tooltip>
@@ -63,6 +73,11 @@ const Navbar = () => {
                             <li className="nav-item">
                                 <Tooltip title="Cart">
                                     <a className="nav-link" to="#"><AiOutlineShoppingCart /></a>
+                                </Tooltip>
+                            </li> */}
+                            <li className="nav-item">
+                                <Tooltip title="Chat">
+                                    <Link className="nav-link" to="/patientDashboard/chat"><BsFillChatDotsFill /></Link>
                                 </Tooltip>
                             </li>
                         </ul>
