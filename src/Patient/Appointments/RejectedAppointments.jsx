@@ -5,7 +5,7 @@ import { useStateContext } from '../../Context/ContextProvider';
 
 const RejectedAppointments = () => {
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const { token, setUser, user } = useStateContext();
     useEffect(() => {
@@ -18,10 +18,10 @@ const RejectedAppointments = () => {
 
     const [appointmentReq, setAppointmentReq] = useState([])
     useEffect(() => {
-        user.get_patient && axiosClient.get('/patient/declined/' + user.get_patient.id)
+        user.get_patient.id && axiosClient.get('/appointments/patient/cancel/' + user.get_patient.id)
             .then((res) => {
                 setAppointmentReq(res.data);
-                setLoading(true);
+                setLoading(false);
             })
     }, [user])
 
@@ -51,7 +51,7 @@ const RejectedAppointments = () => {
                     {
                         !loading ?
                             <tbody>
-                                {!appointmentReq ? appointmentReq.map((appointmentReq, index) => (
+                                {appointmentReq ? appointmentReq.map((appointmentReq, index) => (
                                     <tr key={appointmentReq.id}>
                                         <td scope="row">{index + 1}</td>
                                         <td>{appointmentReq.visit_date_and_time}</td>
@@ -60,7 +60,7 @@ const RejectedAppointments = () => {
                                             doctorData.get_doctor.id === appointmentReq.doctor_id &&
                                             <td key={doctorData.id}>{doctorData.full_name}</td>
                                         ))}
-                                        <td>{appointmentReq.validation_status}</td>
+                                        <td className='text-danger'>{appointmentReq.validation_status}</td>
                                     </tr>
                                 )) :
                                     <tr>

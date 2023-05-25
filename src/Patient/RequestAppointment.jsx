@@ -60,23 +60,23 @@ const RequestAppointment = () => {
         appointmentData = data;
         setIsModalOpen(true);
         {
-            localStorage.getItem('payment') ? axiosClient.post('/appointment', data).then((res) => {
-                navigate('/patientAppointment');
-                localStorage.removeItem('payment');
+            axiosClient.post('/appointment', data).then((res) => {
+                navigate('/patientDashboard');
+                message.info("Appointment booked!!");
+                // localStorage.removeItem('payment');
             }).catch(function (error) {
                 if (error.response) {
                     setErrorData(error.response.data);
                     console.log(error.response.status);
                 }
-            }) :
-                message.warning('Do payment before booking appointment!!')
+            })
         }
         console.log('first')
 
     };
 
     const onFinishFailed = () => {
-        message.error('Submit failed!');
+        message.error('Submit Failed! Fill all data first!');
     };
 
     const fetchDoctorData = () => {
@@ -111,7 +111,7 @@ const RequestAppointment = () => {
                             <Input.TextArea />
                         </Form.Item>
                         <Form.Item>
-                            <Khalti />
+                            {/* <Khalti /> */}
                             <Button
                                 type="primary"
                                 htmlType="submit"

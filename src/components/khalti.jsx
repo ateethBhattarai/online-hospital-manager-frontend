@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import config from './khaltiConfig';
 import KhaltiCheckout from "khalti-checkout-web";
 
-const Khalti = () => {
+const Khalti = (props) => {
 
   let checkout = new KhaltiCheckout(config);
 
@@ -17,7 +17,7 @@ const Khalti = () => {
   }
 
   return (
-    <button onClick={() => checkout.show({ amount: 1000 })} style={btnStyle}>Pay via Khalti</button>
+    <button onClick={() => checkout.show({ amount: props.amount })} style={btnStyle}>Pay via Khalti</button>
   )
 }
 

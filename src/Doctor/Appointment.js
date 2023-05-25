@@ -54,14 +54,14 @@ export const DoctorAppointments = () => {
                                 <th>Date</th>
                                 <th>Symptoms</th>
                                 <th>Patient</th>
-                                <th>Status</th>
+                                <th>Payment Status</th>
                             </tr>
                         </thead>
                         {
                             !loading ?
                                 <tbody>
                                     {console.log(upcomingAppointments)}
-                                    {!upcomingAppointments ? upcomingAppointments.map((upcomingAppointment, index) => (
+                                    {upcomingAppointments ? upcomingAppointments.map((upcomingAppointment, index) => (
                                         <tr key={upcomingAppointment.id}>
                                             <td scope="row">{index + 1}</td>
                                             <td>{upcomingAppointment.visit_date_and_time}</td>
@@ -71,7 +71,8 @@ export const DoctorAppointments = () => {
                                                 <td key={patientData.id}>{patientData.full_name}</td>
                                                 // console.log(patientData.id)
                                             ))}
-                                            <td>{upcomingAppointment.validation_status}</td>
+                                            <td className={upcomingAppointment.payment_status == 'pending' ? 'text-danger' : 'text-success'}>
+                                                {upcomingAppointment.payment_status}</td>
                                         </tr>
                                     )) :
                                         <tr>
@@ -104,7 +105,7 @@ export const DoctorAppointments = () => {
                         {
                             !loading ?
                                 <tbody>
-                                    {!declinedAppointments ? declinedAppointments.map((declinedAppointment, index) => (
+                                    {declinedAppointments ? declinedAppointments.map((declinedAppointment, index) => (
                                         <tr key={declinedAppointment.id}>
                                             <td scope="row">{index + 1}</td>
                                             <td>{declinedAppointment.visit_date_and_time}</td>

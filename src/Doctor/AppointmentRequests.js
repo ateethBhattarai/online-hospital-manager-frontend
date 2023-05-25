@@ -32,17 +32,19 @@ const AppointmentRequests = () => {
         axiosClient.get('/user').then(({ data }) => {
             axiosClient.get('/doctor/' + data.id).then((userData) => {
                 setUser(userData.data);
+                console.log(userData.data)
             })
         })
     }, [])
 
     const [upcomingPendingAppointments, setUpcomingPendingAppointments] = useState([])
     useEffect(() => {
-        user.get_doctor !== undefined && axiosClient.get('/appointments/doctor/previous/' + user.get_doctor.id).then((res) => {
-            setUpcomingPendingAppointments(res.data);
-        })
+        user.get_doctor && axiosClient.get('/appointments/doctor/previous/' + user.get_doctor.id).
+            then((res) => {
+                setUpcomingPendingAppointments(res.data);
+                console.log("ok")
+            })
     }, [user])
-
 
     const [patientData, setPatientData] = useState([])
     useEffect(() => {
@@ -106,7 +108,7 @@ const AppointmentRequests = () => {
                         {
                             !loading ?
                                 <tbody>
-                                    {!upcomingPendingAppointments ? upcomingPendingAppointments.map((upcomingPendingAppointment, index) => (
+                                    {upcomingPendingAppointments ? upcomingPendingAppointments.map((upcomingPendingAppointment, index) => (
                                         <tr key={upcomingPendingAppointment.id}>
                                             <td scope='row'>{index + 1}</td>
                                             {patientData.map((patientData) => (

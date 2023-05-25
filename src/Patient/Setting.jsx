@@ -3,6 +3,8 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { patientPasswordChangeSchema } from '../schemas';
 import AccountSetting from './AccountSetting';
+import Payment from '../components/Payment';
+import { Link } from 'react-router-dom';
 
 const initialValues = {
     current_password: "",
@@ -30,6 +32,7 @@ const Setting = () => {
             <Card className='container my-4' title='Account Setting'>
                 <AccountSetting />
             </Card>
+            <button onClick={() => <Payment />}>Click me</button>
 
             {/* For the purpose of managing password */}
             <Card className='container my-4' title='Password Setting'>

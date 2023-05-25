@@ -34,6 +34,7 @@ import Navbar from './Patient/Navbar';
 import DoctorDetails from './Patient/DoctorDetails';
 import Setting from './Patient/Setting';
 import ViewDoctorDetails from './Patient/ViewDoctorDetails';
+import { AdminSideBar } from './Utility/AdminSideBar';
 
 function App() {
   return (
@@ -44,6 +45,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<SignUp />} />
+          {/* </Routes> */}
+          {/* <Routes> */}
 
 
           {/* Patient routes */}
@@ -58,6 +61,8 @@ function App() {
             <Route path='setting' element={<Setting />} />
             <Route path='viewdoctor/:name' element={<ViewDoctorDetails />} />
           </Route>
+          {/* </Routes>
+        <Routes> */}
 
           {/* Doctor routes */}
           <Route path='/doctorDashboard' element={<Doctor />} />
@@ -65,26 +70,33 @@ function App() {
           {/* <Route path='/doctorSetting' element={<DoctorSetting />} /> */}
           <Route path='/doctorAppointmentRequests' element={<AppointmentRequests />} />
           {/* <Route path='/doctor/chat' element={<DoctorChat />} /> */}
+          {/* </Routes> */}
 
-          {/*Admin Doctor routes */}
-          <Route path="/admin/doctor" element={<CreateDoctor />} />
-          <Route path="/admin/addDoctor" element={<AddDoctor />} />
-          <Route path="/admin/editDoctor/:id" element={<EditDoctor />} />
-          <Route path="/admin/viewDoctor/:id" element={<ViewDoctor />} />
-          <Route path="/admin/dashboard" element={<Admin />} />
 
-          {/*Admin Patient Routes */}
-          <Route path="/admin/patient" element={<CreatePatient />} />
-          <Route path="/admin/addPatient" element={<AddPatient />} />
-          <Route path="/admin/editPatient/:id" element={<EditPatient />} />
-          <Route path="/admin/viewPatient/:id" element={<ViewPatient />} />
+          <Route path="adminDashboard" element={<Admin />} />
+          <Route path="/admin" element={<AdminSideBar />}>
+            {/* <Routes> */}
 
-          {/*Admin Pharmacist Routes */}
-          <Route path='/adminDashboard' element={<Admin />} />
-          <Route path="/admin/pharmacist" element={<CreatePharmacist />} />
-          <Route path="/admin/addPharmacist" element={<AddPharmacist />} />
-          <Route path="/admin/editPharmacist/:id" element={<EditPharmacist />} />
-          <Route path="/admin/viewPharmacist/:id" element={<ViewPharmacist />} />
+            {/*Admin Doctor routes */}
+            <Route path="doctor" element={<CreateDoctor />} />
+            <Route path="addDoctor" element={<AddDoctor />} />
+            <Route path="editDoctor/:id" element={<EditDoctor />} />
+            <Route path="viewDoctor/:id" element={<ViewDoctor />} />
+
+            {/*Admin Patient Routes */}
+            <Route path="patient" element={<CreatePatient />} />
+            <Route path="addPatient" element={<AddPatient />} />
+            <Route path="editPatient/:id" element={<EditPatient />} />
+            <Route path="viewPatient/:id" element={<ViewPatient />} />
+
+            {/*Admin Pharmacist Routes */}
+            <Route path="pharmacist" element={<CreatePharmacist />} />
+            <Route path="addPharmacist" element={<AddPharmacist />} />
+            <Route path="editPharmacist/:id" element={<EditPharmacist />} />
+            <Route path="viewPharmacist/:id" element={<ViewPharmacist />} />
+            {/* </Routes> */}
+          </Route>
+          {/* <Routes> */}
 
           {/* Pharmacist Routes */}
           <Route path="/pharmacistDashboard" element={<PharmacistDashboard />} />

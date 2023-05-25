@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navigate } from 'react-router-dom';
 import { useStateContext } from '../Context/ContextProvider';
 import { DoctorSideBar } from '../Utility/DoctorSidebar'
 import { Card } from 'antd';
+import axiosClient from '../Services/axios';
 
 const Doctor = () => {
     const { token } = useStateContext();
 
+
+    // useEffect(() => {
+    //     axiosClient.get('/user').then(({ data }) => {
+    //         axiosClient.get('/doctor/' + data.id).then((userData) => {
+    //             setUser(userData.data);
+    //         })
+    //     })
+    // }, [])
+
     if (!token) {
         return <Navigate to='/login' />
     }
+
+
     return (
         <>
             <DoctorSideBar />

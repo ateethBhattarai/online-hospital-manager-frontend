@@ -22,6 +22,7 @@ const PendingAppointment = () => {
             .then((res) => {
                 setAppointmentReq(res.data);
                 setLoading(true);
+                console.log(res.data)
             })
     }, [user])
 

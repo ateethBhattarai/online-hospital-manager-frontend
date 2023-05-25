@@ -1,3 +1,4 @@
+import Payment from "./Payment";
 import myKey from "./khaltiKey";
 
 let config = {
@@ -9,7 +10,7 @@ let config = {
     "eventHandler": {
         onSuccess(payload) {
             // hit merchant api for initiating verfication
-            localStorage.setItem('payment', 'successfull');
+            <Payment />
 
         },
         // onError handler is optional

@@ -14,7 +14,7 @@ export const Login = () => {
 
     useEffect(() => {
         if (token) {
-            return navigate(`/${input.role}`);
+            return navigate(`/${input.role}Dashboard`);
         }
     }, [])
 
@@ -30,6 +30,7 @@ export const Login = () => {
             setUser(data.user);
             setToken(data.token);
             navigate(`/${input.role}Dashboard`);
+            console.log(data)
         }).catch(error => {
             const response = error.response;
             setNotification("Invalid Credential!!");

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Empty, Skeleton } from 'antd';
 import axiosClient from '../../Services/axios';
 import { useStateContext } from '../../Context/ContextProvider';
+import Khalti from '../../components/khalti';
 
 const UpcomingAppointments = () => {
 
@@ -22,6 +23,7 @@ const UpcomingAppointments = () => {
         user.get_patient !== undefined && axiosClient.get('/appointments/upcoming/' + user.get_patient.id).then((res) => {
             setUpcomingAppointments(res.data);
             setupcomingAppointmentsdata(res.data[0]);
+            // console.log(res.data)
         })
     }, [user])
 
@@ -45,8 +47,9 @@ const UpcomingAppointments = () => {
                             <th>id</th>
                             <th>Date</th>
                             <th>Symptoms</th>
-                            <th>Doctor</th>
                             <th>Status</th>
+                            <th>Doctor Name</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     {
@@ -57,11 +60,20 @@ const UpcomingAppointments = () => {
                                         <td scope="row">{index + 1}</td>
                                         <td>{upcomingAppointment.visit_date_and_time}</td>
                                         <td>{upcomingAppointment.symptoms}</td>
-                                        {doctorData.map((doctorData) => (
-                                            doctorData.get_doctor.id === upcomingAppointment.doctor_id &&
-                                            <td key={doctorData.id}>{doctorData.full_name}</td>
-                                        ))}
                                         <td>{upcomingAppointment.validation_status}</td>
+                                        {doctorData.map((doctorData, index) => (
+                                            doctorData.get_doctor.id === upcomingAppointment.doctor_id &&
+                                            <React.Fragment key={doctorData.id}>
+                                                <td>{doctorData.full_name}</td>
+                                                {upcomingAppointment.payment_status == 'pending' ?
+                                                    <td>
+                                                        <Khalti amount={doctorData.get_doctor.fees * 100} />
+                                                    </td> :
+                                                    <td className='text-success'>Payment Completed</td>
+                                                }
+                                            </React.Fragment>
+                                        ))}
+
                                     </tr>
                                 )) :
                                     <tr>

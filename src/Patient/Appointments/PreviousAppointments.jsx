@@ -57,7 +57,7 @@ const PreviousAppointments = () => {
                                     doctorData.get_doctor.id === previousAppointment.doctor_id &&
                                     <td key={doctorData.id}>{doctorData.full_name}</td>
                                 ))}
-                                <td>{previousAppointment.validation_status}</td>
+                                <td className={previousAppointment.validation_status == 'declined' ? 'text-danger' : 'text-success'}>{previousAppointment.validation_status}</td>
                             </tr>
                         ))}
                     </tbody> :

@@ -36,14 +36,22 @@ body {
 
 /* Admin SideBar CSS */
 .main_container {
-  position: fixed;
-  z-index: 10;
+  /* position: fixed; */
+  /* z-index: 10; */
+  display: flex;
+
 }
 
 .sidebar {
   background-color: var(--nav-color);
   height: 100vh;
   /* color: white; */
+}
+
+.active {
+  /* border-right: 4px solid white; */
+  background: rgb(179, 180, 190);
+  text-decoration: none;
 }
 
 .top_section {

@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FaBars, FaCogs, FaHome, FaHospitalAlt, FaSearch } from 'react-icons/fa';
 import { IoMdPeople, IoIosPerson } from 'react-icons/io';
 import { GiDoctorFace } from 'react-icons/gi';
-import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink, useNavigate, Outlet } from 'react-router-dom';
 import { useStateContext } from '../Context/ContextProvider';
 import axiosClient from '../Services/axios';
 import { message } from 'antd';
@@ -55,33 +55,33 @@ export const AdminSideBar = () => {
     // if (!token) {
     //     return <Navigate to='/login' />
     // }
+    const navigate = useNavigate();
     const logout = () => {
+        navigate("/login");
+        message.success('Logged Out successfully!!');
         axiosClient.post('/logout').then(() => {
             setUser({});
             setToken(null);
-            <Navigate to='/login' />
-            message.success('Logged Out successfully!!');
         })
     }
 
     return (
-        <div className='main_container' style={{ position: isOpen && "fixed" }}>
+        <div className='d-flex' style={{ position: isOpen }}>
             <motion.div animate={{ width: isOpen ? "210px" : "38px" }} className="sidebar">
                 <div className="top_section">
-                    {isOpen && <h1 className="logo py-3">OnlineHospitalManager</h1>}
+                    {isOpen && <h1 className="logo py-3 fs-4 mt-4">Admin</h1>}
                     <div className="bars">
                         <FaBars onClick={toggle} />
                     </div>
                 </div>
-                <div className="search">
-                    <div className="search_icon">
-                        <FaSearch />
-                    </div>
-                    {isOpen && <input type="text" placeholder='Search...' />}
-                </div>
                 <section className="routes">
                     {routes.map((route) => (
-                        <NavLink to={route.path} key={route.name} className='link text-decoration-none'>
+                        <NavLink
+                            to={route.path}
+                            key={route.name}
+                            className='link text-decoration-none'
+                            activeclassname="active"
+                        >
                             <div className="icon">{route.icon}</div>
                             <AnimatePresence>
                                 {isOpen && <motion.div className="link_text">{route.name}</motion.div>}
@@ -96,6 +96,7 @@ export const AdminSideBar = () => {
                     </div>
                 </section>
             </motion.div>
+            <Outlet />
         </div>
     )
 }
