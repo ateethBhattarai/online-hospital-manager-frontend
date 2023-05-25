@@ -14,7 +14,7 @@ export const Login = () => {
 
     useEffect(() => {
         if (token) {
-            return navigate(`/${input.role}Dashboard`);
+            return navigate(`/${input.role}`);
         }
     }, [])
 
@@ -29,11 +29,11 @@ export const Login = () => {
         axiosClient.post('/login', input).then(({ data }) => {
             setUser(data.user);
             setToken(data.token);
-            navigate(`/${input.role}Dashboard`);
+            navigate(`/${input.role}`);
             console.log(data)
         }).catch(error => {
             const response = error.response;
-            setNotification("Invalid Credential!!");
+            message.error("Invalid Credential!!");
             if (response && response.status === 422) {
                 console.log(response.data.errors)
             }
@@ -55,7 +55,7 @@ export const Login = () => {
     return (
         <>
             <Card className='col-sm-6 offset-sm-3 border mt-4 p-2'>
-                {notification && message.error(notification)}
+                {/* {message.error("Error Occured!")} */}
                 <div className="my-4">
                     <div className="d-flex">
                         <h2 className='mx-2'>Login as:</h2>

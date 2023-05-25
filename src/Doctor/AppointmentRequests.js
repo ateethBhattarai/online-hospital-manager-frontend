@@ -90,7 +90,6 @@ const AppointmentRequests = () => {
 
     return (
         <>
-            <DoctorSideBar />
             <Card className="container text-center box-shadow p-2">
                 <h4>Request Table</h4>
                 <div className='container-fluid table_data rounded text-light p-4 mt-3 '>

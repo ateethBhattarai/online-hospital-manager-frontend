@@ -17,7 +17,7 @@ export const AdminSideBar = () => {
 
     const routes = [
         {
-            path: "/adminDashboard",
+            path: "/admin",
             name: "Dashboard",
             icon: <FaHome />
         },

@@ -57,22 +57,17 @@ const Navbar = () => {
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 fs-4">
                             <li className="nav-item">
                                 <Tooltip title="Home">
-                                    <Link className="nav-link" to='/patientDashboard'><AiOutlineHome /></Link>
+                                    <Link className="nav-link" to='/patient'><AiOutlineHome /></Link>
                                 </Tooltip>
                             </li>
                             <li className="nav-item">
                                 <Tooltip title="Doctors">
-                                    <Link className="nav-link" to='/patientDashboard/doctordetails'><GiDoctorFace /></Link>
+                                    <Link className="nav-link" to='/patient/doctordetails'><GiDoctorFace /></Link>
                                 </Tooltip>
                             </li>
                             <li className="nav-item">
                                 <Tooltip title="Inventory">
-                                    <Link className="nav-link" to="/patientDashboard/inventory"><MdOutlineInventory /></Link>
-                                </Tooltip>
-                            </li>
-                            <li className="nav-item">
-                                <Tooltip title="Chat">
-                                    <Link className="nav-link" to="/patientDashboard/chat"><BsFillChatDotsFill /></Link>
+                                    <Link className="nav-link" to="/patient/inventory"><MdOutlineInventory /></Link>
                                 </Tooltip>
                             </li>
                         </ul>

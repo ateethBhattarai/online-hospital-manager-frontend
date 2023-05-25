@@ -50,7 +50,7 @@ const AccountSetting = () => {
             console.log(values);
             axiosClient.put('/patient/' + accountData.id, values).then((res) => {
                 message.info("Data Updated Successfully!!")
-                navigate('/patientDashboard'); //navigates the page to '/patientDashboard'
+                navigate('/patient'); //navigates the page to patient Dashboard
             }).catch(error => {
                 const response = error.response;
                 message.error("Error Occured!!");

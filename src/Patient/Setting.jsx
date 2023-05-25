@@ -37,7 +37,7 @@ const Setting = () => {
             console.log(values);
             axiosClient.put('/patient/changePassword/' + initialValues.id, values).then((res) => {
                 message.info("Data Updated Successfully!!")
-                navigate('/patientDashboard'); //navigates the page to '/patientDashboard'
+                navigate('/patient'); //navigates the page to '/patientDashboard'
             }).catch(error => {
                 const response = error.response;
                 message.error("Error Occured!!");

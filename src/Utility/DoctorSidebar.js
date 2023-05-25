@@ -4,7 +4,7 @@ import { FaBars, FaCogs, FaHome } from 'react-icons/fa';
 import { TbCheckupList, TbGitPullRequest } from 'react-icons/tb'
 import { BiMessageRoundedDetail } from 'react-icons/bi'
 import { AiOutlineLogout } from 'react-icons/ai'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import axiosClient from '../Services/axios';
 import { useStateContext } from '../Context/ContextProvider';
 import { message } from 'antd';
@@ -31,24 +31,19 @@ export const DoctorSideBar = () => {
 
     const routes = [
         {
-            path: "/doctorDashboard",
+            path: "/doctor",
             name: "Dashboard",
             icon: <FaHome />
         },
         {
-            path: "/doctorAppointment",
+            path: "/doctor/doctorAppointment",
             name: "Appointment",
             icon: <TbCheckupList />
         },
         {
-            path: "/doctorAppointmentRequests",
+            path: "/doctor/doctorAppointmentRequests",
             name: "Request",
             icon: <TbGitPullRequest />
-        },
-        {
-            path: "/doctor/chat",
-            name: "Chat",
-            icon: <BiMessageRoundedDetail />
         },
         {
             path: "/doctorSetting",
@@ -61,14 +56,19 @@ export const DoctorSideBar = () => {
         <div className='main_container border' style={{ position: isOpen && "fixed" }}>
             <motion.div animate={{ width: isOpen ? "210px" : "38px" }} className="sidebar">
                 <div className="top_section">
-                    {isOpen && <h1 className="logo py-3">OnlineHospitalManager</h1>}
+                    {isOpen && <h1 className="logo py-3">O.H.M.</h1>}
                     <div className="bars">
                         <FaBars onClick={toggle} />
                     </div>
                 </div>
                 <section className="routes">
                     {routes.map((route) => (
-                        <NavLink to={route.path} key={route.name} className='link text-decoration-none'>
+                        <NavLink
+                            to={route.path}
+                            key={route.name}
+                            className='link text-decoration-none'
+                            activeclassname="active"
+                        >
                             <div className="icon">{route.icon}</div>
                             <AnimatePresence>
                                 {isOpen && <motion.div className="link_text">{route.name}</motion.div>}
@@ -83,6 +83,7 @@ export const DoctorSideBar = () => {
                     </div>
                 </section>
             </motion.div>
+            <Outlet />
         </div >
     )
 }

@@ -32,7 +32,7 @@ export const PharmacistSideBar = () => {
 
     const routes = [
         {
-            path: "/pharmacistDashboard",
+            path: "/pharmacist",
             name: "Dashboard",
             icon: <FaHome />
         },
@@ -42,7 +42,7 @@ export const PharmacistSideBar = () => {
             icon: <MdOutlineInventory />
         },
         {
-            path: "/setting",
+            path: "/pharmacist/setting",
             name: "Edit Profile",
             icon: <FaCogs />
         }

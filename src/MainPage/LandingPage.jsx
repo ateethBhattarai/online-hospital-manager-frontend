@@ -1,19 +1,19 @@
 import React from 'react'
-import { Routes, Route, Link } from 'react-router-dom'
-import { Home } from './Home'
-import { Login } from './Login'
-import { Navbar } from './Navbar'
+import { Link } from 'react-router-dom'
+import { Card } from 'antd'
+import Features from './Features'
+import MainFooter from './MainFooter'
 
 export const LandingPage = () => {
     return (
         <>
             <div className="container-fluid d-flex justify-content-between">
-                <div className="col-5">
-
-                </div>
+                <Card className="col-5">
+                    <img src="https://arstorageazureservices.blob.core.windows.net/site/2019/10/5d9fe2225552d-5d9fe2225556dgestaohospitalar.png.png" alt="Photo" />
+                </Card>
                 <div className="col-6">
-                    <div className="container">
-                        <h2 className='text-center fs-1'>Online Hospital Manager</h2>
+                    <div className="container mt-4">
+                        <h2 className='text-center fs-1 my-3'>Online Hospital Manager</h2>
                         <p className='text-center fs-6'>
                             Streamline your hospital operations with our innovative online solution.
                             The Online Hospital Manager is a comprehensive web-based application designed
@@ -31,6 +31,9 @@ export const LandingPage = () => {
                     </div>
                 </div>
             </div>
+
+            <Features />
+            <MainFooter />
         </>
     )
 }

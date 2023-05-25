@@ -42,6 +42,7 @@ import { AddInventory } from './Pharmacist/Inventory/AddInventory';
 import InventoryCards from './Patient/InventoryCards';
 import ImageUploader from './ImageUploader';
 import { LandingPage } from './MainPage/LandingPage';
+import { DoctorSideBar } from './Utility/DoctorSidebar';
 
 function App() {
   return (
@@ -52,11 +53,10 @@ function App() {
             <Route index element={<LandingPage />} />
             <Route path='login' element={<Login />} />
             <Route path='signup' element={<SignUp />} />
-
           </Route>
 
           {/* Patient routes */}
-          <Route path='/patientDashboard' element={<Navbar />} >
+          <Route path='/patient' element={<Navbar />} >
             <Route index element={<PatientDashboard />} />
             <Route path='doctordetails' element={<DoctorDetails />} />
             <Route path='setting' element={<Setting />} />
@@ -65,17 +65,16 @@ function App() {
           </Route>
 
           {/* Doctor routes */}
-          <Route path='/doctorDashboard' element={<Doctor />} />
-          <Route path='/doctorAppointment' element={<DoctorAppointments />} />
-          {/* <Route path='/doctorSetting' element={<DoctorSetting />} /> */}
-          <Route path='/doctorAppointmentRequests' element={<AppointmentRequests />} />
-          {/* <Route path='/doctor/chat' element={<DoctorChat />} /> */}
-          {/* </Routes> */}
+          <Route path='/doctor' element={<DoctorSideBar />} >
+            <Route index element={<Doctor />} />
+            <Route path='doctorAppointment' element={<DoctorAppointments />} />
+            {/* <Route path='/doctorSetting' element={<DoctorSetting />} /> */}
+            <Route path='doctorAppointmentRequests' element={<AppointmentRequests />} />
+          </Route>
 
 
-          <Route path="adminDashboard" element={<Admin />} />
           <Route path="/admin" element={<AdminSideBar />}>
-            {/* <Routes> */}
+            <Route index element={<Admin />} />
 
             {/*Admin Doctor routes */}
             <Route path="doctor" element={<CreateDoctor />} />
@@ -94,13 +93,12 @@ function App() {
             <Route path="addPharmacist" element={<AddPharmacist />} />
             <Route path="editPharmacist/:id" element={<EditPharmacist />} />
             <Route path="viewPharmacist/:id" element={<ViewPharmacist />} />
-            {/* </Routes> */}
           </Route>
-          {/* <Routes> */}
+
 
           {/* Pharmacist Routes */}
-          <Route path="/pharmacistDashboard" element={<PharmacistDashboard />} />
           <Route path='/pharmacist' element={<PharmacistSideBar />}>
+            <Route index element={<PharmacistDashboard />} />
             <Route path='inventory' element={<CreateInventory />} />
             <Route path='addinventory' element={<AddInventory />} />
             <Route path='editinventory/:id' element={<EditInventory />} />
@@ -108,7 +106,6 @@ function App() {
 
           {/* Invalid route */}
           <Route path='*' element={<PageNotFound />} />
-          <Route path='/images' element={<ImageUploader />} />
 
         </Routes>
       </ContextProvider>
