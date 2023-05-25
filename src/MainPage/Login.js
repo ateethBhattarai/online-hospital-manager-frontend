@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useStateContext } from '../Context/ContextProvider';
 import axiosClient from '../Services/axios';
 import { motion } from 'framer-motion';
@@ -73,6 +73,7 @@ export const Login = () => {
                 <input type="password" name='password' className="form-control my-2" value={input.password || ""} onChange={handleChanges} placeholder='password' />
                 <input type="text" value={input.role = userRole} hidden readOnly />
                 <button className='btn btn-primary my-2' onClick={submitForm}>Login</button>
+                <p>New Here? <Link className='text-primary text-decoration-none' to='/signUp'> SignUp</Link></p>
             </Card>
         </>
     )

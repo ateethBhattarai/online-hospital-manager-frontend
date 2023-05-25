@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaBars } from 'react-icons/fa'
 import logo from '../Assets/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 export const Navbar = () => {
     return (
@@ -23,6 +23,7 @@ export const Navbar = () => {
                     </ul>
                 </div>
             </nav>
+            <Outlet />
         </>
     )
 }

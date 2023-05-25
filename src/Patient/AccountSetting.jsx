@@ -36,6 +36,8 @@ const AccountSetting = () => {
                 accountData.chronic_disease = userData.data.get_patient.chronic_disease || "";
                 accountData.blood_group = userData.data.get_patient.blood_group || "";
                 accountData.email = userData.data.email || "";
+                accountData.created_by = userData.data.created_by || "";
+                accountData.modified_by = userData.data.modified_by || "";
             })
         })
     }, [])
@@ -76,7 +78,7 @@ const AccountSetting = () => {
                     <input
                         type="text"
                         className="form-control"
-                        full_name='full_name'
+                        name='full_name'
                         placeholder="full_name"
                         value={values.full_name}
                         onChange={handleChange}

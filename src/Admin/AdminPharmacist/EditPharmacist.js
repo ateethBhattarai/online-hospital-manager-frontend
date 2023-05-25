@@ -33,17 +33,14 @@ export const EditPharmacist = () => {
     const { id } = useParams(); //gets id present in the url
 
     const fetchpharmacistData = () => {
-        ManualRoute.get('pharmacist/' + id + '/edit').then((res) => {
+        ManualRoute.get('/pharmacist/' + id + '/edit').then((res) => {
             setInputs({
                 full_name: res.data.full_name,
                 email: res.data.email,
                 address: res.data.address,
                 phone_number: res.data.phone_number,
                 dob: res.data.dob,
-                qualification: res.data.get_pharmacist.qualification,
-                fees: res.data.get_pharmacist.fees,
-                availability_time: res.data.get_pharmacist.availability_time,
-                speciality: res.data.get_pharmacist.speciality
+                qualification: res.data.get_pharmacist.qualification
             });
         });
     }
@@ -83,20 +80,6 @@ export const EditPharmacist = () => {
                                 <div className="col-md-3 mb-3">
                                     <label >Qualification</label>
                                     <input type="text" className="form-control" name='qualification' value={inputs.qualification || ""} onChange={handleChange} placeholder='98123.......' required />
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="col-md-6 mb-3">
-                                    <label>Speciality</label>
-                                    <input type="text" className="form-control" name='speciality' value={inputs.speciality || ""} onChange={handleChange} placeholder='speciality...' required />
-                                </div>
-                                <div className="col-md-4 mb-3">
-                                    <label >Available Time</label>
-                                    <input type="date" className="form-control" name='availability_time' value={inputs.availability_time || ""} onChange={handleChange} placeholder='pharmacist available time...' required />
-                                </div>
-                                <div className="col-md-2 mb-3">
-                                    <label >Fees</label>
-                                    <input type="number" className="form-control" name='fees' value={inputs.fees || ""} onChange={handleChange} placeholder='200' required />
                                 </div>
                             </div>
                             <div className="form-row">

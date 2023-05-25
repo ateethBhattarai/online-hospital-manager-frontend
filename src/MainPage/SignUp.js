@@ -67,7 +67,6 @@ export const SignUp = () => {
     };
     return (
         <>
-            <Navbar />
             <Card
                 className="col-sm-6 offset-sm-3 box-shadow p-3 my-3"
                 title='SignUp'>
@@ -163,25 +162,17 @@ export const SignUp = () => {
                             </select>
                             <span className='text-danger'>{errorData?.errors.blood_group}</span>
                         </div>
-                        {/* <div className="col-md-5 mb-3">
-                            <div className="form-group">
-                                <label >Blood Group</label>
-                                <select id="inputState" className="form-control" value={inputs.blood_group = selected || ""} onChange={optionChange}>
-                                    {options.map(option => (
-                                        <option key={option.value} value={option.value}>
-                                            {option.text}
-                                        </option>
-                                    ))}
-                                </select>
-                                <span className='text-danger'>{errorData?.errors.blood_group}</span>
-                            </div>
-                        </div> */}
                     </div>
                     <div className="col-md-6 mb-3">
                         <form>
                             <div className="form-group">
                                 <label>Select Profile Photo</label>
-                                <input type="file" className="form-control-file bg-light p-1" value={inputs.profile_photo = photo || ""} onChange={photoChange} />
+                                <input
+                                    type="file"
+                                    className="form-control-file bg-light p-1"
+                                    value={inputs.profile_photo = photo || ""}
+                                    onChange={photoChange}
+                                />
                             </div>
                         </form>
                     </div>

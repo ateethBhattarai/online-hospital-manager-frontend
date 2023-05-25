@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
-import { AdminSideBar } from '../../Utility/AdminSideBar';
 import ManualRoute from '../../Utility/ManualRoute';
 import SubNav from '../../Utility/SubNav';
 import { motion } from 'framer-motion';
-import { useStateContext } from '../../Context/ContextProvider';
 import { Avatar, Button, message, Popconfirm, Skeleton, Tooltip } from 'antd';
 import { FaUser } from 'react-icons/fa';
 import { Table } from 'react-bootstrap';
 import { MdDeleteOutline } from 'react-icons/md';
+import { useStateContext } from '../../Context/ContextProvider';
 
-export const CreateDoctor = () => {
-    const [doctor, setDoctor] = useState([]);
+export const CreateInventory = () => {
+    const [inventory, setinventory] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // get doctor data
+    // get inventory data
     useEffect(() => {
-        fetchAllDoctorData();
+        fetchAllinventoryData();
     }, []);
-    const fetchAllDoctorData = () => {
-        ManualRoute.get('/doctor').then(res => {
+    const fetchAllinventoryData = () => {
+        ManualRoute.get('/inventory').then(res => {
             setLoading(true);
-            setDoctor(res.data);
+            setinventory(res.data);
         })
     }
 
     const { setNotification, notification } = useStateContext();
     const deleteData = (e, id) => {
-        ManualRoute.delete('/doctor/' + id).then((res) => {
-            setNotification("Doctor Deleted Successfully!!");
-            fetchAllDoctorData();
+        ManualRoute.delete('/inventory/' + id).then((res) => {
+            setNotification("inventory Deleted Successfully!!");
+            fetchAllinventoryData();
         })
     }
 
@@ -40,7 +39,7 @@ export const CreateDoctor = () => {
                 {/* <div className='row'> */}
                 {/* <AdminSideBar /> */}
                 <div className="col-md-12 mx-auto pl-4">
-                    <SubNav name="Doctor" first_link="/admin/patient" second_link="/admin/addDoctor" />
+                    <SubNav name="Inventory" first_link="/pharmacist/inventory" second_link="/pharmacist/addinventory" />
                     {notification &&
                         <motion.div className="alert alert-success" role="alert" style={{ position: "fixed" }}
                             initial={{ y: -1000 }}
@@ -55,50 +54,40 @@ export const CreateDoctor = () => {
                             <thead>
                                 <tr>
                                     <th>id</th>
-                                    <th>Full Name</th>
-                                    <th>Profile Photo</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    <th>DOB</th>
-                                    <th>Phone Number</th>
-                                    <th>Qualification</th>
-                                    <th>Speciality</th>
-                                    <th>Fees</th>
-                                    <th>Available Time</th>
-                                    <th>Created by</th>
-                                    <th>Modified By</th>
+                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Item Type</th>
+                                    <th>Manufactured Date</th>
+                                    <th>Expiry Date</th>
+                                    <th>Created_by</th>
+                                    <th>Modified_by</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             {loading ?
                                 <tbody>
-                                    {doctor.map((doctors, index) => (
-                                        <tr key={doctors.id}>
+                                    {inventory.map((inventorys, index) => (
+                                        <tr key={inventorys.id}>
                                             <td>{index + 1}</td>
-                                            <td>{doctors.full_name}</td>
+                                            <td>{inventorys.item_name}</td>
                                             <td>
-                                                {doctors.profile_photo ? <Avatar shape='square' size="large" src={doctors.profile_photo} /> : <Avatar shape="square" size="large" icon={<FaUser />} />}
+                                                {inventorys.photo ? <Avatar shape='square' size="large" src={inventorys.photo} /> : <Avatar shape="square" size="large" icon={<FaUser />} />}
                                             </td>
-                                            <td>{doctors.email}</td>
-                                            <td>{doctors.address}</td>
-                                            <td>{doctors.dob}</td>
-                                            <td>{doctors.phone_number}</td>
-                                            <td>{doctors.get_doctor.qualification}</td>
-                                            <td>{doctors.get_doctor.speciality}</td>
-                                            <td>{doctors.get_doctor.fees}</td>
-                                            <td>{doctors.get_doctor.availability_time}</td>
-                                            <td>{doctors.get_doctor.created_by}</td>
-                                            <td>{doctors.get_doctor.modified_by}</td>
+                                            <td>{inventorys.item_type}</td>
+                                            <td>{inventorys.manufactured_date}</td>
+                                            <td>{inventorys.expiry_date}</td>
+                                            <td>{inventorys.created_by}</td>
+                                            <td>{inventorys.modified_by}</td>
                                             <td className='d-flex'>
-                                                <Link to={"/admin/editDoctor/" + doctors.id} className='btn btn-primary mx-1'>EDIT</Link>
-                                                {/* <Link to={"/viewDoctor/" + doctors.id} className='btn btn-success mx-1'>View</Link> */}
+                                                <Link to={"/pharmacist/editinventory/" + inventorys.id} className='btn btn-primary mx-1'>EDIT</Link>
+                                                {/* <Link to={"/viewinventory/" + inventorys.id} className='btn btn-success mx-1'>View</Link> */}
                                                 <Tooltip placement="bottom" title="Delete">
                                                     <Popconfirm
                                                         className='btn btn-danger p-1'
                                                         placement="topLeft"
-                                                        title={`Are you sure you want to delete the data of ${doctors.full_name}?`}
+                                                        title={`Are you sure you want to delete the data of ${inventorys.item_name}?`}
                                                         onConfirm={(e) => {
-                                                            deleteData(e, doctors.id)
+                                                            deleteData(e, inventorys.id)
                                                             message.success("Data deleted successfully!")
                                                         }}
                                                         okText="Yes"

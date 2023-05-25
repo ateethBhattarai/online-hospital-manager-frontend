@@ -35,34 +35,34 @@ import DoctorDetails from './Patient/DoctorDetails';
 import Setting from './Patient/Setting';
 import ViewDoctorDetails from './Patient/ViewDoctorDetails';
 import { AdminSideBar } from './Utility/AdminSideBar';
+import { CreateInventory } from './Pharmacist/Inventory/CreateInventory';
+import { PharmacistSideBar } from './Utility/PharmacistSideBar';
+import { EditInventory } from './Pharmacist/Inventory/EditInventory';
+import { AddInventory } from './Pharmacist/Inventory/AddInventory';
+import InventoryCards from './Patient/InventoryCards';
+import ImageUploader from './ImageUploader';
+import { LandingPage } from './MainPage/LandingPage';
 
 function App() {
   return (
     <>
       <ContextProvider>
         <Routes>
-          {/* <Route path="/" element={<AdminSideBar />} /> */}
-          <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<SignUp />} />
-          {/* </Routes> */}
-          {/* <Routes> */}
+          <Route path='/' element={<Home />}>
+            <Route index element={<LandingPage />} />
+            <Route path='login' element={<Login />} />
+            <Route path='signup' element={<SignUp />} />
 
+          </Route>
 
           {/* Patient routes */}
-          {/* <Route path='/patientDashboard' element={<Patient />} />
-          <Route path='/patientAppointment' element={<Appointment />} />
-          <Route path='/patientSetting' element={<PatientSetting />} />
-          <Route path='/patientBookAppointment' element={<RequestAppointment />} />
-          <Route path='/patient/chat' element={<PatientChat />} /> */}
           <Route path='/patientDashboard' element={<Navbar />} >
             <Route index element={<PatientDashboard />} />
             <Route path='doctordetails' element={<DoctorDetails />} />
             <Route path='setting' element={<Setting />} />
             <Route path='viewdoctor/:name' element={<ViewDoctorDetails />} />
+            <Route path='inventory' element={<InventoryCards />} />
           </Route>
-          {/* </Routes>
-        <Routes> */}
 
           {/* Doctor routes */}
           <Route path='/doctorDashboard' element={<Doctor />} />
@@ -100,9 +100,16 @@ function App() {
 
           {/* Pharmacist Routes */}
           <Route path="/pharmacistDashboard" element={<PharmacistDashboard />} />
+          <Route path='/pharmacist' element={<PharmacistSideBar />}>
+            <Route path='inventory' element={<CreateInventory />} />
+            <Route path='addinventory' element={<AddInventory />} />
+            <Route path='editinventory/:id' element={<EditInventory />} />
+          </Route>
 
           {/* Invalid route */}
           <Route path='*' element={<PageNotFound />} />
+          <Route path='/images' element={<ImageUploader />} />
+
         </Routes>
       </ContextProvider>
     </>

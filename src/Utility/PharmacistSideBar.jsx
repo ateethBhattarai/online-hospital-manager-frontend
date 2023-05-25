@@ -3,8 +3,9 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FaBars, FaCogs, FaHome } from 'react-icons/fa';
 import { TbCheckupList, TbGitPullRequest } from 'react-icons/tb'
 import { BiMessageRoundedDetail } from 'react-icons/bi'
+import { MdOutlineInventory } from 'react-icons/md'
 import { AiOutlineLogout } from 'react-icons/ai'
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import axiosClient from '../Services/axios';
 import { useStateContext } from '../Context/ContextProvider';
 import { message } from 'antd';
@@ -36,7 +37,12 @@ export const PharmacistSideBar = () => {
             icon: <FaHome />
         },
         {
-            path: "/pharmacistSetting",
+            path: "/pharmacist/inventory",
+            name: "Inventory",
+            icon: <MdOutlineInventory />
+        },
+        {
+            path: "/setting",
             name: "Edit Profile",
             icon: <FaCogs />
         }
@@ -68,6 +74,7 @@ export const PharmacistSideBar = () => {
                     </div>
                 </section>
             </motion.div>
+            <Outlet />
         </div >
     )
 }

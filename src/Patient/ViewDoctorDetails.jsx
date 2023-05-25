@@ -32,6 +32,13 @@ const ViewDoctorDetails = () => {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
+    const [input, setInput] = useState({})
+    const bookappointment = () => {
+        setInput({
+            full_name: doctor[0].full_name,
+
+        })
+    }
 
     return (
         <>
@@ -59,9 +66,9 @@ const ViewDoctorDetails = () => {
                             <div>
                                 {!loading ?
                                     <>
-                                        <Button className='button_color' onClick={showModal}>
+                                        {/* <Button className='button_color' onClick={() => bookappointment()}>
                                             Book Appointment
-                                        </Button>
+                                        </Button> */}
                                         <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                                             <input type='text' placeholder='Name' />
                                         </Modal>

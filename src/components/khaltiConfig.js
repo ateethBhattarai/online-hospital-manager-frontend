@@ -2,7 +2,6 @@ import Payment from "./Payment";
 import myKey from "./khaltiKey";
 
 let config = {
-    // replace this key with yours
     "publicKey": myKey.publicTestKey,
     "productIdentity": "1234567890",
     "productName": "Drogon",
@@ -10,7 +9,9 @@ let config = {
     "eventHandler": {
         onSuccess(payload) {
             // hit merchant api for initiating verfication
-            <Payment />
+            localStorage.setItem('payment', 'successfull');
+            <Payment id={config.appointmentID} />
+            // console.log(payload.amount ? "Success" : "pending");
 
         },
         // onError handler is optional
@@ -23,6 +24,8 @@ let config = {
         }
     },
     "paymentPreference": ["KHALTI"],
+    "appointmentID": 0
 };
+
 
 export default config;

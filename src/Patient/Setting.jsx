@@ -1,19 +1,33 @@
-import { Card } from 'antd';
-import React from 'react';
+import { Card, message } from 'antd';
+import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import { patientPasswordChangeSchema } from '../schemas';
 import AccountSetting from './AccountSetting';
 import Payment from '../components/Payment';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axiosClient from '../Services/axios';
+import { useStateContext } from '../Context/ContextProvider';
 
 const initialValues = {
-    current_password: "",
+    id: "",
     new_password: "",
     confirm_password: ""
 }
 
 const Setting = () => {
+    const navigate = useNavigate(); //used for navigation purpose
 
+    const { setUser, user } = useStateContext();
+    useEffect(() => {
+        axiosClient.get('/user').then(({ data }) => {
+            axiosClient.get('/patient/' + data.id).then((userData) => {
+                setUser(userData.data);
+                initialValues.id = userData.data.id || "";
+
+            })
+        })
+    },
+        [])
 
     // for password setting
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
@@ -21,6 +35,14 @@ const Setting = () => {
         validationSchema: patientPasswordChangeSchema,
         onSubmit: (values, action) => {
             console.log(values);
+            axiosClient.put('/patient/changePassword/' + initialValues.id, values).then((res) => {
+                message.info("Data Updated Successfully!!")
+                navigate('/patientDashboard'); //navigates the page to '/patientDashboard'
+            }).catch(error => {
+                const response = error.response;
+                message.error("Error Occured!!");
+                console.log(response.data.errors)
+            })
             action.resetForm();
         }
     })
@@ -32,12 +54,11 @@ const Setting = () => {
             <Card className='container my-4' title='Account Setting'>
                 <AccountSetting />
             </Card>
-            <button onClick={() => <Payment />}>Click me</button>
 
             {/* For the purpose of managing password */}
             <Card className='container my-4' title='Password Setting'>
                 <form onSubmit={handleSubmit}>
-                    <div className="form-floating mb-3">
+                    {/* <div className="form-floating mb-3">
                         <input
                             type="password"
                             className="form-control"
@@ -49,7 +70,7 @@ const Setting = () => {
                         />
                         <label htmlFor="floatingInput">Current Password</label>
                         {errors.current_password && touched.current_password ? <p className='text-danger'>{errors.current_password}</p> : null}
-                    </div>
+                    </div> */}
                     <div className="form-floating mb-3">
                         <input
                             type="password"

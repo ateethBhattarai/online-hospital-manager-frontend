@@ -64,7 +64,7 @@ const DoctorDetails = () => {
                                     />
                                 }
                             >
-                                <Link to={`/patient/viewdoctor/${doctorData.full_name}`} className='text-decoration-none'>
+                                <Link to={`/patientDashboard/viewdoctor/${doctorData.full_name}`} className='text-decoration-none'>
                                     <Meta
                                         title={doctorData.full_name}
                                         description={<>{desc.substring(0, 100)}.....</>}

@@ -65,16 +65,11 @@ const Navbar = () => {
                                     <Link className="nav-link" to='/patientDashboard/doctordetails'><GiDoctorFace /></Link>
                                 </Tooltip>
                             </li>
-                            {/* <li className="nav-item">
+                            <li className="nav-item">
                                 <Tooltip title="Inventory">
-                                    <a className="nav-link" to="#"><MdOutlineInventory /></a>
+                                    <Link className="nav-link" to="/patientDashboard/inventory"><MdOutlineInventory /></Link>
                                 </Tooltip>
                             </li>
-                            <li className="nav-item">
-                                <Tooltip title="Cart">
-                                    <a className="nav-link" to="#"><AiOutlineShoppingCart /></a>
-                                </Tooltip>
-                            </li> */}
                             <li className="nav-item">
                                 <Tooltip title="Chat">
                                     <Link className="nav-link" to="/patientDashboard/chat"><BsFillChatDotsFill /></Link>
