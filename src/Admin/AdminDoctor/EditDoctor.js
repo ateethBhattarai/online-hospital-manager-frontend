@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStateContext } from '../../Context/ContextProvider';
-import { AdminSideBar } from '../../Utility/AdminSideBar';
 import ManualRoute from '../../Utility/ManualRoute';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const EditDoctor = () => {
     const navigate = useNavigate(); //used for navigation purpose
@@ -21,6 +22,12 @@ export const EditDoctor = () => {
         ManualRoute.put('/doctor/' + id, inputs).then((res) => {
             setNotification("Doctor Updated Successfully!!");
             navigate('/admin/doctor'); //navigates the page to '/doctor'
+        }).catch(error => {
+            const response = error.response;
+            toast.error("Something went wrong! Invalid value formate!!");
+            if (response && response.status === 422) {
+                console.log(response.data.errors)
+            }
         })
     }
 
@@ -45,7 +52,6 @@ export const EditDoctor = () => {
                 dob: res.data.dob,
                 qualification: res.data.get_doctor.qualification,
                 fees: res.data.get_doctor.fees,
-                availability_time: res.data.get_doctor.availability_time,
                 speciality: res.data.get_doctor.speciality
             });
         });
@@ -93,10 +99,6 @@ export const EditDoctor = () => {
                                     <label>Speciality</label>
                                     <input type="text" className="form-control" name='speciality' value={inputs.speciality || ""} onChange={handleChange} placeholder='speciality...' required />
                                 </div>
-                                <div className="col-md-4 mb-3">
-                                    <label >Available Time</label>
-                                    <input type="date" className="form-control" name='availability_time' value={inputs.availability_time || ""} onChange={handleChange} placeholder='doctor available time...' required />
-                                </div>
                                 <div className="col-md-2 mb-3">
                                     <label >Fees</label>
                                     <input type="number" className="form-control" name='fees' value={inputs.fees || ""} onChange={handleChange} placeholder='200' required />
@@ -120,6 +122,7 @@ export const EditDoctor = () => {
                         </form>
                     </div>
                 </div>
+                <ToastContainer />
                 {/* </div> */}
             </div>
         </>

@@ -13,13 +13,13 @@ const ViewDoctorDetails = () => {
     //get doctor details
     useEffect(() => {
         fetchDoctorData()
-    }, [])
+    }, [doctor])
     const fetchDoctorData = () => {
         axiosClient.get('/doctor/' + name).then((res) => {
             setDoctor(() => res.data);
             setLoading(false);
         })
-        console.log(doctor[0])
+        // console.log(doctor[0])
     }
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -60,15 +60,14 @@ const ViewDoctorDetails = () => {
                                         } : {
                                             src: { ...doctor[0].profile_photo }
                                         }}
+                                    src={doctor[0].profile_photo || ""}
+
                                 /> :
                                 <Skeleton.Image active />
                             }
                             <div>
                                 {!loading ?
                                     <>
-                                        {/* <Button className='button_color' onClick={() => bookappointment()}>
-                                            Book Appointment
-                                        </Button> */}
                                         <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
                                             <input type='text' placeholder='Name' />
                                         </Modal>

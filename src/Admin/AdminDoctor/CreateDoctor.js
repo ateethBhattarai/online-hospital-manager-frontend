@@ -9,6 +9,7 @@ import { Avatar, Button, message, Popconfirm, Skeleton, Tooltip } from 'antd';
 import { FaUser } from 'react-icons/fa';
 import { Table } from 'react-bootstrap';
 import { MdDeleteOutline } from 'react-icons/md';
+import { AiOutlineEdit } from 'react-icons/ai';
 
 export const CreateDoctor = () => {
     const [doctor, setDoctor] = useState([]);
@@ -64,7 +65,6 @@ export const CreateDoctor = () => {
                                     <th>Qualification</th>
                                     <th>Speciality</th>
                                     <th>Fees</th>
-                                    <th>Available Time</th>
                                     <th>Created by</th>
                                     <th>Modified By</th>
                                     <th>Action</th>
@@ -83,15 +83,17 @@ export const CreateDoctor = () => {
                                             <td>{doctors.address}</td>
                                             <td>{doctors.dob}</td>
                                             <td>{doctors.phone_number}</td>
-                                            <td>{doctors.get_doctor.qualification}</td>
+                                            <td>{doctors.get_doctor.qualification || ""}</td>
                                             <td>{doctors.get_doctor.speciality}</td>
                                             <td>{doctors.get_doctor.fees}</td>
-                                            <td>{doctors.get_doctor.availability_time}</td>
                                             <td>{doctors.get_doctor.created_by}</td>
                                             <td>{doctors.get_doctor.modified_by}</td>
                                             <td className='d-flex'>
-                                                <Link to={"/admin/editDoctor/" + doctors.id} className='btn btn-primary mx-1'>EDIT</Link>
-                                                {/* <Link to={"/viewDoctor/" + doctors.id} className='btn btn-success mx-1'>View</Link> */}
+                                                <Tooltip title="Edit" className='mx-1'>
+                                                    <Link to={"/admin/editDoctor/" + doctors.id} >
+                                                        <Button type='primary' size='large' icon={<AiOutlineEdit />} />
+                                                    </Link>
+                                                </Tooltip>
                                                 <Tooltip placement="bottom" title="Delete">
                                                     <Popconfirm
                                                         className='btn btn-danger p-1'

@@ -86,11 +86,6 @@ export const AddDoctor = () => {
                                     <input type="text" className="form-control" name='speciality' value={inputs.speciality || ""} onChange={handleChange} placeholder='speciality...' required />
                                     <span className='text-danger'>{errorData?.errors.speciality}</span>
                                 </div>
-                                <div className="col-md-4 mb-3">
-                                    <label >Available Time</label>
-                                    <input type="date" className="form-control" name='availability_time' value={inputs.availability_time || ""} onChange={handleChange} placeholder='doctor available time...' required />
-                                    <span className='text-danger'>{errorData?.errors.availability_time}</span>
-                                </div>
                                 <div className="col-md-2 mb-3">
                                     <label >Fees</label>
                                     <input type="number" className="form-control" name='fees' value={inputs.fees || ""} onChange={handleChange} placeholder='200' required />

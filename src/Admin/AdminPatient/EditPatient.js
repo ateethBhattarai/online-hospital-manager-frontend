@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStateContext } from '../../Context/ContextProvider';
-import { AdminSideBar } from '../../Utility/AdminSideBar';
 import ManualRoute from '../../Utility/ManualRoute';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const EditPatient = () => {
     const navigate = useNavigate(); //used for navigation purpose
@@ -21,6 +22,13 @@ export const EditPatient = () => {
         ManualRoute.put('/patient/' + id, inputs).then((res) => {
             setNotification("Patient Updated Successfully!!")
             navigate('/admin/patient'); //navigates the page to '/patient'
+        }).catch(error => {
+            const response = error.response;
+            toast.error("Something went wrong! Invalid value formate!!");
+
+            if (response && response.status === 422) {
+                console.log(response.data.errors)
+            }
         })
     }
 
@@ -131,6 +139,7 @@ export const EditPatient = () => {
                         </form>
                     </div>
                 </div>
+                <ToastContainer />
             </div>
             {/* </div> */}
         </>

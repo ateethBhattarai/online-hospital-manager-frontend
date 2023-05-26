@@ -61,6 +61,8 @@ const DoctorDetails = () => {
                                             } : {
                                                 src: { ...doctorData.profile_photo }
                                             }}
+                                        src={doctorData.profile_photo || ""}
+
                                     />
                                 }
                             >

@@ -37,11 +37,6 @@ export const AdminSideBar = () => {
             icon: <IoIosPerson />
         },
         {
-            path: "/admin/pharmacy",
-            name: "Pharmacy",
-            icon: <FaHospitalAlt />
-        },
-        {
             path: "/admin/setting",
             name: "Edit Profile",
             icon: <FaCogs />
@@ -57,7 +52,7 @@ export const AdminSideBar = () => {
     // }
     const navigate = useNavigate();
     const logout = () => {
-        navigate("/login");
+        navigate("/");
         message.success('Logged Out successfully!!');
         axiosClient.post('/logout').then(() => {
             setUser({});

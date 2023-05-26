@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { useStateContext } from '../Context/ContextProvider';
 import axiosClient from '../Services/axios';
-import { motion } from 'framer-motion';
-import { Card, message } from 'antd';
+import { Card } from 'antd';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const Login = () => {
     const [input, setInput] = useState({});
@@ -33,7 +34,8 @@ export const Login = () => {
             console.log(data)
         }).catch(error => {
             const response = error.response;
-            message.error("Invalid Credential!!");
+            toast.error("Invalid Credential !");
+
             if (response && response.status === 422) {
                 console.log(response.data.errors)
             }
@@ -75,6 +77,7 @@ export const Login = () => {
                 <button className='btn btn-primary my-2' onClick={submitForm}>Login</button>
                 <p>New Here? <Link className='text-primary text-decoration-none' to='/signUp'> SignUp</Link></p>
             </Card>
+            <ToastContainer />
         </>
     )
 }

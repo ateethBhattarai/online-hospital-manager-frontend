@@ -8,6 +8,8 @@ import { FaUser } from 'react-icons/fa';
 import { MdDeleteOutline } from 'react-icons/md';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { Table } from 'react-bootstrap';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const CreatePatient = (props) => {
     const [patient, setPatient] = useState([]);
@@ -70,7 +72,7 @@ export const CreatePatient = (props) => {
                                             <td>{patients.dob}</td>
                                             <td>{patients.phone_number}</td>
                                             <td>{patients.get_patient.blood_group}</td>
-                                            <td>{patients.get_patient.chronic_disease}</td>
+                                            <td>{patients.get_patient.chronic_disease || "-"}</td>
                                             <td>{patients.get_patient.created_by}</td>
                                             <td>{patients.get_patient.modified_by}</td>
                                             <td className='d-flex'>
@@ -79,7 +81,6 @@ export const CreatePatient = (props) => {
                                                         <Button type='primary' size='large' icon={<AiOutlineEdit />} />
                                                     </Link>
                                                 </Tooltip>
-                                                {/* <Link to={"/admin/viewPatient/" + patients.id} className='btn btn-success mx-1'>View</Link> */}
                                                 <Tooltip placement="bottom" title="Delete">
                                                     <Popconfirm
                                                         className='btn btn-danger p-1'
@@ -87,7 +88,7 @@ export const CreatePatient = (props) => {
                                                         title={`Are you sure you want to delete the data of ${patients.full_name}?`}
                                                         onConfirm={(e) => {
                                                             deleteData(e, patients.id)
-                                                            message.success("Data deleted successfully!")
+                                                            toast.success("Data deleted successfully!")
                                                         }}
                                                         okText="Yes"
                                                         cancelText="No"
@@ -109,6 +110,7 @@ export const CreatePatient = (props) => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
             {/* </div> */}
         </>
     )

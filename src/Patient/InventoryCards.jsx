@@ -58,6 +58,7 @@ const InventoryCards = () => {
                                             } : {
                                                 src: { ...inventoryData.photo }
                                             }}
+                                        src={inventoryData.photo || ""}
                                     />
                                 }
                             >
